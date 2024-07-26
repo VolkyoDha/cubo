@@ -1,0 +1,52 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Movie Dashboard</title>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/microsoft-signalr/3.1.18/signalr.min.js"></script>
+    <script src="~/js/dashboard.js"></script>
+</head>
+<body>
+    <div>
+        <form asp-action="UploadCsv" asp-controller="Home" method="post" enctype="multipart/form-data">
+            <input type="file" name="file" />
+            <button type="submit">Upload CSV</button>
+        </form>
+    </div>
+    <div>
+        <h2>Movies</h2>
+        <table>
+            <thead>
+                <tr>
+                    <th>Title</th>
+                    <th>Year</th>
+                    <th>Genre</th>
+                    <th>Duration</th>
+                    <th>Director</th>
+                    <th>Rating</th>
+                    <th>Rating Count</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var movie in Model)
+                {
+                    <tr>
+                        <td>@movie.Movie.Title</td>
+                        <td>@movie.Year</td>
+                        <td>@movie.Genre.Name</td>
+                        <td>@movie.Duration</td>
+                        <td>@movie.Director.Name</td>
+                        <td>@movie.Rating</td>
+                        <td>@movie.RatingCount</td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+    <div>
+        <canvas id="ratingChart"></canvas>
+    </div>
+</body>
+</html>
